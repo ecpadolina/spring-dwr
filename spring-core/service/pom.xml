@@ -43,5 +43,10 @@
       <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.directwebremoting</groupId>
+      <artifactId>dwr</artifactId>
+    </dependency>
+
   </dependencies>
 </project>

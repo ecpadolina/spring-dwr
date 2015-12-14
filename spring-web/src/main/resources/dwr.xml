@@ -8,7 +8,7 @@
        http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
 
         <dwr:annotation-config/>
-        <dwr:annotation-scan base-package="ecp.spring.web" scanDataTransferObject="true" scanRemoteProxy="true" />
+        <dwr:annotation-scan base-package="ecp.spring" scanDataTransferObject="true" scanRemoteProxy="true" />
         <dwr:url-mapping />
         <dwr:controller id="dwrController" debug="true" />
         <dwr:configuration />
