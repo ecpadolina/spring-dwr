@@ -9,7 +9,9 @@ import ecp.spring.service.PersonManagerImpl;
 import ecp.spring.service.RoleManagerImpl;
 import ecp.spring.service.PersonTransformer;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Date;
@@ -23,9 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class PersonController{
+
+	List<String> currentRoles = new ArrayList<String>();
 
 	@Autowired
 	PersonManagerImpl personManagerImpl;
@@ -50,6 +56,13 @@ public class PersonController{
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String showIndex(ModelMap model){
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) 
+								SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		for (SimpleGrantedAuthority role : authorities) {
+			currentRoles.add(role.toString());
+			System.out.println(role.toString());
+		}
+
 		List personList = personManagerImpl.listPerson(0,1,"id");
 		List roleList = roleManagerImpl.listRolesWithPerson();
 		model.addAttribute("personList", personList);

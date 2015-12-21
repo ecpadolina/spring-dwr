@@ -17,9 +17,6 @@
   <mvc:annotation-driven />
   
   <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
-  <import resource="classpath:service.xml"/>
-  <import resource="classpath:hibernate.xml"/>
-  <import resource="classpath:dwr.xml"/>
 
   <mvc:resources mapping="/resources/**" location="/resources/" />
   

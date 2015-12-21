@@ -6,18 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ecp.spring.service.PersonManagerDWRImpl;
+import ecp.spring.service.DWRService;
 
 @Controller
-public class PersonDWRController {
+public class DWRController {
 
     @Autowired
-    PersonManagerDWRImpl personDWR;
+    DWRService dwrService;
 
-    @RequestMapping(value="/test/dwr/add", method=RequestMethod.GET)
+    @RequestMapping(value="/person/dwr/index", method=RequestMethod.GET)
     public String add(){
         return "add";
     }
+
 
 }
 

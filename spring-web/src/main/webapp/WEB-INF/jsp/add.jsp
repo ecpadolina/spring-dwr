@@ -5,55 +5,46 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      var jq = jQuery.noConflict();
+    </script>
     <script type='text/javascript' src="/dwr/engine.js"></script>
     <script type='text/javascript' src="/dwr/util.js"></script>
-    <script type="text/javascript" src="/dwr/interface/dwrService.js"></script>
-
- <title>Spring MVC - DWR Integration Tutorial</title>
+    <script type="text/javascript" src="/dwr/interface/personDWRService.js"></script>
+ <title>Spring MVC - DWR </title>
 </head>
 <body>
+    Sort By: <select id="column" name="column">
+      <option value="id">Id</option>
+      <option value="name.lastName">Last Name</option>
+      <option value="gwa">Gwa</option>
+    </select>
+    <select id="order" name="order">
+      <option value="1">Ascending</option>
+      <option value="2">Descending</option>
+    </select>
+    <select id="role" name="role"/>
+  <input type="submit" value="Search" onclick="listPersons()" />
 
-<h3>Spring MVC - DWR Integration Tutorial</h3>
-<h4>AJAX version</h4>
+ <table>
+  <thead>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Birthday</th>
+    <th>Grade</th>
+  </thead>
+  <tbody id="person">
+  </tbody>
+ </table>
+ <span id="id"></span>
 
-Demo 1
-<div style="border: 1px solid #ccc; width: 250px;">
- Add Two Numbers:
+ <br>
+ <h2> Action: </h2>
+ User Id: <input type="text" id="personId" size="10"/> <input type="button" value="Delete" onclick="deletePerson()"/>
 
- <input id="inputNumber1" type="text" size="5"> +
- <input id="inputNumber2" type="text" size="5">
- <input type="submit" value="Add" onclick="add()" />
 
- Sum: <span id="sum">(Result will be shown here)</span>
-</div>
-
-<script type="text/javascript">
- // Retrieves the matching value
- // Delegates to the dwrService
- function add() {
-  // Retrieve value of text inputs
-  var operand1 = dwr.util.getValue("inputNumber1");
-  var operand2 = dwr.util.getValue("inputNumber2");
-
-  // Pass two numbers, a callback function, and error function
-  dwrService.add(operand1, operand2, {
-   callback : handleAddSuccess,
-   errorHandler : handleAddError
-  });
- }
-
- // data contains the returned value
- function handleAddSuccess(data) {
-  // Assigns data to result id
-  dwr.util.setValue("sum", data);
- }
-
- function handleAddError() {
-  // Show a popup message
-  alert("We can't add those values!");
- }
-</script>
-
+<script src="/resources/personDWR.js"></script>
 </body>
 </html>
