@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,12 @@ public class Project{
     @JoinTable(name = "project_person", joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id"))
 	private Set<Person> persons;
+
+	@OneToMany(fetch = FetchType.EAGER, 
+             cascade = CascadeType.ALL, 
+             orphanRemoval = true)
+  	@JoinColumn(name="project_id")
+	private Set<Tickets> tickets;
 
 	public int getId() {
 		return id;
@@ -73,5 +80,13 @@ public class Project{
 	}
 	public Set getPersons() {
 		return persons;
+	}
+
+	public void setTickets(Set<Tickets> tickets){
+		this.tickets = tickets;
+	}
+
+	public Set<Tickets> getTickets(){
+		return this.tickets;
 	}
 }

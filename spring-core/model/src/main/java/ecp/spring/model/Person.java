@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
@@ -56,6 +57,9 @@ public class Person{
 
   @ManyToMany(mappedBy = "persons", fetch = FetchType.LAZY)
   private Set<Project> projects;
+
+  @OneToOne (mappedBy = "person", fetch = FetchType.LAZY)
+  private Tickets ticket;
 
   public Person(){}
   
@@ -126,5 +130,13 @@ public class Person{
   
   public Set<Role> getRoles(){
     return roles;
+  }
+
+  public void setTicket(Tickets ticket){
+    this.ticket = ticket;
+  }
+
+  public Tickets getTicket(){
+    return this.ticket;
   }
 }

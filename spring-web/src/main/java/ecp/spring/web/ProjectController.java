@@ -1,6 +1,7 @@
 package ecp.spring.web;
 
 import ecp.spring.model.Project;
+import ecp.spring.model.Tickets;
 import ecp.spring.model.Person;
 import ecp.spring.model.ProjectDTO;
 import ecp.spring.service.PersonManagerImpl;
@@ -112,5 +113,31 @@ public class ProjectController {
         System.out.println(project.getId());
         projectManagerImpl.updateProject(project);
         return "redirect:/project";
+    }
+
+    @RequestMapping(value = "/project/edit/{id}/addTicket", method = RequestMethod.GET)
+    public String addTicketGet(ModelMap model, @PathVariable(value = "id") int id){
+        Tickets ticket = new Tickets();
+        Project project = projectManagerImpl.getProject(id);
+        model.addAttribute("ticket", ticket);
+        model.addAttribute("persons", project.getPersons());
+        return "ticketForm";
+    }
+
+    @RequestMapping(value = "/project/edit/{id}/addTicket", method = RequestMethod.POST)
+    public String addTicketPOST(ModelMap model, @PathVariable(value = "id") int id,
+                                @ModelAttribute(value = "ticket") Tickets ticket,
+                                BindingResult result,
+                                @RequestParam(value ="persons", required = true) Integer personId){
+        Project project = projectManagerImpl.getProject(id);
+        Set<Tickets> tickets = project.getTickets();
+        if(personId != null){
+            ticket.setPerson(personManagerImpl.getPerson(personId));
+        }
+        tickets.add(ticket);
+        project.setTickets(tickets);
+        projectManagerImpl.updateProject(project);
+        tickets = project.getTickets();
+        return "redirect:/";
     }
 }

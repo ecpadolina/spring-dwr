@@ -60,7 +60,6 @@ public class PersonController{
 								SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		for (SimpleGrantedAuthority role : authorities) {
 			currentRoles.add(role.toString());
-			System.out.println(role.toString());
 		}
 
 		List personList = personManagerImpl.listPerson(0,1,"id");

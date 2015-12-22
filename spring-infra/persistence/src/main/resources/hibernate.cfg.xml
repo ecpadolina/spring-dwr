@@ -19,6 +19,7 @@
     <mapping class="ecp.spring.model.Role"/>
     <mapping class="ecp.spring.model.Project"/>
     <mapping class="ecp.spring.model.Users"/>
+    <mapping class="ecp.spring.model.Tickets"/>
   </session-factory>
 </hibernate-configuration>
 
