@@ -11,7 +11,7 @@
     </script>
     <script type='text/javascript' src="/dwr/engine.js"></script>
     <script type='text/javascript' src="/dwr/util.js"></script>
-    <script type="text/javascript" src="/dwr/interface/personDWRService.js"></script>
+    <script type="text/javascript" src="/dwr/interface/DWRService.js"></script>
  <title>Spring MVC - DWR </title>
 </head>
 <body>

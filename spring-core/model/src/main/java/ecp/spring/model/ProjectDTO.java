@@ -10,6 +10,7 @@ public class ProjectDTO {
     private Date startDate;
     private Date endDate;
     private Set persons;
+    private Set tickets;
 
     public int getId() {
         return id;
@@ -44,6 +45,14 @@ public class ProjectDTO {
     }
     public Set getPersons() {
         return persons;
+    }
+
+    public void setTickets(Set<Tickets> tickets){
+        this.tickets = tickets;
+    }
+
+    public Set getTickets(){
+        return tickets;
     }
 
 }

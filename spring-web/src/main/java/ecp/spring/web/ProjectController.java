@@ -87,14 +87,16 @@ public class ProjectController {
 
     @RequestMapping(value = "/project/edit/{id}", method = RequestMethod.GET)
     public String editProjectGet(ModelMap model, @PathVariable(value = "id") int id) {
-        ProjectDTO project = projectTransformer.toDTO(projectManagerImpl.getProject(id));
+        Project project = projectManagerImpl.getProject(id);
         model.addAttribute("persons", personManagerImpl.listPerson(0, 1, "id"));
+        model.addAttribute("id", id);
         model.addAttribute("project", project);
+        model.addAttribute("tickets", project.getTickets());
         return "projectForm";
     }
 
     @RequestMapping(value = "/project/edit/{id}", method = RequestMethod.POST)
-    public String editProjectPost(ModelMap model, @ModelAttribute(value = "project") Project project,
+    public String editProjectPost(ModelMap model, @ModelAttribute(value = "project") Project project, 
                                   BindingResult result,
                                   @RequestParam(value = "members", required = false) String[] personIds) {
         projectValidator.validate(project, result);
@@ -102,7 +104,6 @@ public class ProjectController {
             model.addAttribute("persons", personManagerImpl.listPerson(0, 1, "id"));
             return "projectForm";
         }
-
         Set<Person> members = new HashSet<Person>();
         if (personIds != null) {
             for (String id : personIds) {
@@ -110,7 +111,7 @@ public class ProjectController {
             }
             project.setPersons(members);
         }
-        System.out.println(project.getId());
+        project.setTickets(getProjectTickets(project.getId()));
         projectManagerImpl.updateProject(project);
         return "redirect:/project";
     }
@@ -138,6 +139,10 @@ public class ProjectController {
         project.setTickets(tickets);
         projectManagerImpl.updateProject(project);
         tickets = project.getTickets();
-        return "redirect:/";
+        return "redirect:/project/edit/" + id;
+    }
+
+    public Set<Tickets> getProjectTickets(int id){
+        return projectManagerImpl.getProject(id).getTickets();
     }
 }

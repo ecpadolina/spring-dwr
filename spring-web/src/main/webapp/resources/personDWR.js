@@ -14,7 +14,7 @@ window.onload=function(){
 }
 
 function listRoles(){
-	personDWRService.listRolesWithPerson({
+	DWRService.listRolesWithPerson({
 		callback: rolesList
 	});
 
@@ -28,7 +28,7 @@ function listPersons(){
 	var column = dwr.util.getValue("column") == null ? "id" : dwr.util.getValue("column");
 	var order = dwr.util.getValue("order") == null ? 1 : dwr.util.getValue("order");
 
-	personDWRService.listPerson(role, order, column, {
+	DWRService.listPerson(role, order, column, {
 		callback: function(person){
 			var cellFuncs = [
 				function(data) { return data.id; },
@@ -46,7 +46,7 @@ function listPersons(){
 function deletePerson(){
 	if(confirm("Delete person?")){
 		var personId = jq("#personId").val();
-		personDWRService.deletePerson(personId, {
+		DWRService.deletePerson(personId, {
 			callback: function(){
 				alert("Person successfully deleted!");
 				listPersons();

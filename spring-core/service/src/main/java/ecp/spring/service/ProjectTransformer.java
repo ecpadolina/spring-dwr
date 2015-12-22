@@ -16,6 +16,7 @@ public class ProjectTransformer {
         dto.setStartDate(project.getStartDate());
         dto.setEndDate(project.getEndDate());
         dto.setPersons(project.getPersons());
+        dto.setTickets(project.getTickets());
         return dto;
     }
 
@@ -26,6 +27,7 @@ public class ProjectTransformer {
         project.setStartDate(dto.getStartDate());
         project.setEndDate(dto.getEndDate());
         project.setPersons(dto.getPersons());
+        project.setTickets(dto.getTickets());
         return project;
     }
 }

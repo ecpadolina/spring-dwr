@@ -16,6 +16,7 @@
           <dwr:convert type="bean" class="ecp.spring.model.ContactInfo"/>
           <dwr:convert type="bean" class="ecp.spring.model.Address"/>
           <dwr:convert type="bean" class="ecp.spring.model.Name"/>
+          <dwr:convert type="bean" class="ecp.spring.model.Tickets"/>
           <dwr:convert type="bean" class="ecp.spring.model.Role"/>
           <dwr:convert type="bean" class="ecp.spring.model.PersonModel"/>
         </dwr:configuration>
