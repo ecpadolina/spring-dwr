@@ -47,6 +47,7 @@
 				<th> Ticket Details </tH>
 				<th> Ticket Status </th>
 				<th> Assigned Person </th>
+				<th> Actions </th>
 			</thead>
 			<tbody id="tickets">
 			</tbody>
@@ -75,6 +76,7 @@
 						function(data) { return data.ticketDetails; },
 						function(data) { return data.ticketStatus; },
 						function(data) { return (data.person.name.lastName + ", " + data.person.name.firstName); },
+						function(data) { return "<a href=\"/project/edit/${id}/editTicket/" + data.id + "\">Edit Ticket</a>" }
 					];
 					dwr.util.removeAllRows("tickets");
 					dwr.util.addRows("tickets", data, cellFuncs, { escapeHtml:false });

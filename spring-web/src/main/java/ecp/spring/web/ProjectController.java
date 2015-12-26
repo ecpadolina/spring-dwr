@@ -91,7 +91,6 @@ public class ProjectController {
         model.addAttribute("persons", personManagerImpl.listPerson(0, 1, "id"));
         model.addAttribute("id", id);
         model.addAttribute("project", project);
-        model.addAttribute("tickets", project.getTickets());
         return "projectForm";
     }
 
@@ -99,11 +98,6 @@ public class ProjectController {
     public String editProjectPost(ModelMap model, @ModelAttribute(value = "project") Project project, 
                                   BindingResult result,
                                   @RequestParam(value = "members", required = false) String[] personIds) {
-        projectValidator.validate(project, result);
-        if (result.hasErrors()) {
-            model.addAttribute("persons", personManagerImpl.listPerson(0, 1, "id"));
-            return "projectForm";
-        }
         Set<Person> members = new HashSet<Person>();
         if (personIds != null) {
             for (String id : personIds) {
@@ -112,6 +106,11 @@ public class ProjectController {
             project.setPersons(members);
         }
         project.setTickets(getProjectTickets(project.getId()));
+        projectValidator.validate(project, result);
+        if (result.hasErrors()) {
+            model.addAttribute("persons", personManagerImpl.listPerson(0, 1, "id"));
+            return "projectForm";
+        }
         projectManagerImpl.updateProject(project);
         return "redirect:/project";
     }
@@ -138,8 +137,41 @@ public class ProjectController {
         tickets.add(ticket);
         project.setTickets(tickets);
         projectManagerImpl.updateProject(project);
-        tickets = project.getTickets();
         return "redirect:/project/edit/" + id;
+    }
+
+    @RequestMapping(value ="/project/edit/{id}/editTicket/{tId}", method = RequestMethod.GET)
+    public String editTicketGET(ModelMap model, @PathVariable(value = "tId") int ticketId,
+                                @PathVariable(value = "id") int projectId){
+        Project project = projectManagerImpl.getProject(projectId);
+        Tickets ticketToEdit = null;
+        for(Tickets ticket : project.getTickets()){
+            if(ticketId == ticket.getId()){
+                ticketToEdit = ticket;
+            }
+        }
+        model.addAttribute("ticket", ticketToEdit);
+        model.addAttribute("persons", project.getPersons());
+        return "ticketForm";
+    }
+
+    @RequestMapping(value ="/project/edit/{id}/editTicket/{tId}", method = RequestMethod.POST)
+    public String editTicketPOST(ModelMap moel, @ModelAttribute(value = "ticket") Tickets ticket,
+                                 BindingResult result,
+                                 @PathVariable(value = "id") int projectId,
+                                 @RequestParam(value = "persons", required = true) Integer personId){
+        Project project = projectManagerImpl.getProject(projectId);
+        Set<Tickets> tickets = project.getTickets();
+        for(Tickets tempTicket : tickets){
+            if(tempTicket.getId() == ticket.getId()){
+                tempTicket.setTicketDetails(ticket.getTicketDetails());
+                tempTicket.setTicketStatus(ticket.getTicketStatus());
+                tempTicket.setPerson(personManagerImpl.getPerson(personId));
+            }
+            project.setTickets(tickets);
+            projectManagerImpl.updateProject(project);
+        }
+        return "redirect:/project/edit/" + projectId;
     }
 
     public Set<Tickets> getProjectTickets(int id){

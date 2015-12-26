@@ -13,6 +13,8 @@
     <title>Spring Activity - User Form</title>
 </head>
 <body>
+	<jsp:include page="headers.jsp"/>
+	<h1>User Form</h1>
 	<form:form method="POST" accept-charset="UTF-8" modelAttribute="user">
 		Username: <form:input path="username"/><br>
 		Password: <form:input path="password"/><br>

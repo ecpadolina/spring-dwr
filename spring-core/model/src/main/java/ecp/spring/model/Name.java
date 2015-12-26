@@ -45,7 +45,7 @@ public class Name{
     return middleName;
   }
   
-  public String toString(){
+  public String getFullName(){
     return getLastName() + ", " + getFirstName();
   }
 }

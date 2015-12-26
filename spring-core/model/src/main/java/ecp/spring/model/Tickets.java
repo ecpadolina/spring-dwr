@@ -13,24 +13,32 @@ import javax.persistence.JoinColumn;
 
 import java.util.Set;
 
+import org.directwebremoting.annotations.DataTransferObject;
+import org.directwebremoting.annotations.RemoteProperty;
+
 @Entity
+@DataTransferObject
 @Table(name = "tickets")
 public class Tickets{
 
+	@RemoteProperty
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@RemoteProperty
 	@Column(name = "ticket_details")
 	private String ticketDetails;
 
+	@RemoteProperty
 	@Column(name = "ticket_status")
 	private String ticketStatus;
 
 	@OneToOne
 	@JoinTable(name = "ticket_person", joinColumns = @JoinColumn(name = "ticket_id"),
 			   inverseJoinColumns = @JoinColumn(name="person_id"))
+	@RemoteProperty
 	private Person person;
 
 	public Tickets(){}

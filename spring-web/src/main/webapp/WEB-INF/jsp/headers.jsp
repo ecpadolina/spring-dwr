@@ -5,6 +5,9 @@
 		<a href="/project"> Projects </a> <a href="/project/add"> Add Project </a>
 	</div>
 	<div>
+		<a href="/users"> Users </a> <a href="/users/add"> Add User </a>
+	</div>
+	<div>
 		<a href="/?lang=fil">Tagalog</a>
 		<a href="/?lang=en">English</a>
 	</div>

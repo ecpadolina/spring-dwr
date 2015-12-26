@@ -1,13 +1,3 @@
-jq(document).ready(function(){
-	jq("#test").click(function(){
-		var test = [];
-		jq('[name="contact"').each(function(index){
-			test.push({"number": jq(this).val()});
-		});
-		console.log(test);
-	});
-});
-
 window.onload=function(){
 	listPersons();
 	listRoles();
@@ -36,6 +26,7 @@ function listPersons(){
 				function(data) { return data.lastName; },
 				function(data) { return new Date(data.birthday).toISOString().slice(0,10); },
 				function(data) { return data.gwa; },
+				function(data) { return "<a href=\"person/edit/" + data.id + "\"/>Edit Person</a>"}
 			];
 			dwr.util.removeAllRows("person");
 			dwr.util.addRows("person", person, cellFuncs, { escapeHtml:false });
@@ -58,3 +49,4 @@ function deletePerson(){
 		});
 	}
 }
+
