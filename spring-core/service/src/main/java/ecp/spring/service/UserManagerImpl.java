@@ -26,7 +26,7 @@ public class UserManagerImpl implements UserDetailsService {
    		throws UsernameNotFoundException {
 		UserDetails userDetails = null;
 		Users user = userDaoImpl.getUserByUsername(username);
-		userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), 
+		userDetails = new User(user.getUsername(), 
 			user.getPassword(), user.getEnabled(), true, true, true, getAuthorities(user));
 		return userDetails;
 	}

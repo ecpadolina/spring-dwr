@@ -11,3 +11,6 @@
 		<a href="/?lang=fil">Tagalog</a>
 		<a href="/?lang=en">English</a>
 	</div>
+	<div>
+		<a href="/logout">Log Out</a>
+	</div>

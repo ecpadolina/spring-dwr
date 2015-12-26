@@ -38,9 +38,7 @@
 		<tbody id="person">
 		</tbody>
 	</table>
-	 <br>
-	 <h2> Action: </h2>
-	 User Id: <input type="text" id="personId" size="10"/> <input type="button" value="Delete" onclick="deletePerson()"/>
+	 Delete Person: <input type="text" id="personId" placeholder="Enter Person Id"/> <input type="button" value="Delete" onclick="deletePerson()"/>
 	 
 	<script type='text/javascript' src="/dwr/engine.js"></script>
     <script type='text/javascript' src="/dwr/util.js"></script>
