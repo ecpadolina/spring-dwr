@@ -10,7 +10,7 @@
         <dwr:annotation-config/>
         <dwr:annotation-scan base-package="ecp.spring" scanDataTransferObject="true" scanRemoteProxy="true" />
         <dwr:url-mapping />
-        <dwr:controller id="dwrController" debug="true" />
+        <dwr:controller id="dwrController" debug="true"/>
         <dwr:configuration>
           <dwr:convert type="bean" class="ecp.spring.model.Person"/>
           <dwr:convert type="bean" class="ecp.spring.model.ContactInfo"/>

@@ -69,14 +69,6 @@ public class PersonController{
 		return "index";
 	}
 
-	@RequestMapping(value="/", headers="Accept=application/json")
-	@ResponseBody
-	public List personlist(@RequestParam("role") Integer role,
-						   @RequestParam("order") Integer order,
-						   @RequestParam("column") String column){
-		return personManagerImpl.listPerson(role,order,column);
-	}
-
 	@RequestMapping(value="/person/{id}", method=RequestMethod.GET)
 	public @ResponseBody Person getPersonJSON(@PathVariable int id){
 		return personManagerImpl.getPerson(id);

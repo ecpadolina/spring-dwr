@@ -36,7 +36,7 @@ function listPersons(){
 
 function deletePerson(){
 	if(confirm("Delete person?")){
-		var personId = jq("#personId").val();
+		var personId = dwr.util.getValue("personId");
 		DWRService.deletePerson(personId, {
 			callback: function(){
 				alert("Person successfully deleted!");

@@ -23,39 +23,7 @@ $(document).ready(function() {
                                        '<input type="text" name="contactInfo"/>'+
                                        '<button class="delete">Remove</button></div>');
     });
-
-    $("#search").click(function(event){
-      var role = $("#role").val();
-      var column = $("#column").val();
-      var order = $("#order").val();
-      
-      $.ajax({
-        url: "/",
-        dataType: "json",
-        data:{
-            "role": role,
-            "column": column,
-            "order": order
-        },
-
-        success:function(persons){
-          $("#table").children().remove();
-          $.each(persons, function(i, person){
-            $("#table").append("<tr><td>" + person.id + "</td>" + 
-              "<td>" + person.firstName + " " + person.lastName + "</td>" +
-              "<td>" + new Date(person.birthday).toISOString().slice(0,10) + "</td>" +
-              "<td>" + person.gwa + "</td>" +
-              "<td><form method=\"POST\"><input type=\"hidden\" name=\"id\" value=\""+person.id+"\"/><input type=\"submit\" value=\"Delete\"/></form>"+
-              "<button onclick=\"location.href=\'/person/edit/" + person.id + "\'\">Edit</button></td></tr>");
-          });
-        },
-        error:function(){
-            console.log("error");
-        },
-      });
-      event.preventDefault();
-    });
-
+    
     $("#roleSearch").click(function(event){
       var column = $("#column").val();
       var order = $("#order").val();
